@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Short Polling</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+</head>
+<body>
+    <header>
+        <h1>Short Polling</h1>
+    </header>
+
+    <div id="randomNumbers">
+
+    </div>
+
+
+    <script>
+        const randomNumbers = document.getElementById("randomNumbers");
+        const DELAY = 6000;
+
+        async function poll() {
+            const response = await fetch ("/randomnumbers");
+            const result = await response.json();
+
+            randomNumbers.textContent = result.data;
+        }
+
+        setInterval(poll, DELAY);
+    </script>
+</body>
+</html>
