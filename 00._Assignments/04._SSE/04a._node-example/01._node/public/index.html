@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSE</title>
+</head>
+<body>
+    <h1>Server Sent Events</h1>
+
+    <p>Status:</p>
+    <div id="server-sent_status"></div>
+    
+    <p>Time:</p>
+    <div id="server-sent_time"></div>
+
+    <script>
+        const ServerSentStatusDiv = document.getElementById('server-sent_status');
+        const ServerSentTimeDiv = document.getElementById('server-sent_time');
+
+        const eventSource = new EventSource("/synchronizetime");
+        const style = document.createElement('style');
+        style.innerHTML = `
+            body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            }
+            h1 {
+            color: #4CAF50;
+            }
+            #events {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            }
+            #server-sent_status, #server-sent_time {
+            font-size: 1.2em;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            }
+        `;
+        document.head.appendChild(style);
+        const colors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#8B00FF'];
+        let colorIndex = 0;
+
+        function getNextRainbowColor() {
+            const color = colors[colorIndex];
+            colorIndex = (colorIndex + 1) % colors.length;
+            return color;
+        }
+
+        eventSource.addEventListener("message", (event) => {
+            ServerSentTimeDiv.textContent = event.data;
+            ServerSentTimeDiv.style.color = getNextRainbowColor(); // Change the text color to a random color
+        })
+
+        eventSource.addEventListener("open", (event) => {
+            ServerSentStatusDiv.textContent = "Connected";
+        })
+
+        eventSource.addEventListener("error", (event) => {
+            if (event.target.readyState === EventSource.CLOSED) {
+                ServerSentStatusDiv.textContent = 'Connection was closed';
+            } else if (event.target.readyState === EventSource.CONNECTING) {
+                ServerSentStatusDiv.textContent = 'Connecting...';
+            } else {
+                ServerSentStatusDiv.textContent = 'Error';
+            }
+        });
+
+    </script>
+
+</body>
+</html>
