@@ -52,26 +52,26 @@ async function createOffer() {
 }
 
 async function createAnswer() {
-  await createPeerConnection("sdpAnswerTextArea");
+    await createPeerConnection("sdpAnswerTextArea");
 
-  let offer = document.getElementById("sdpOfferTextArea");
-  if (!offer) return alert("Offer is required");
-  offer = JSON.parse(offer);
+    let offer = document.getElementById("sdpOfferTextArea").value;
+    if (!offer) return alert("Offer is required")
+    offer = JSON.parse(offer);
 
-  await peerConnection.setRemoteDescription(offer);
+    await peerConnection.setRemoteDescription(offer);
 
-  const answer = await peerConnection.createAnswer();
-  await peerConnection.setLocalDescription(answer);
+    const answer = await peerConnection.createAnswer();
+    await peerConnection.setLocalDescription(answer);
 
-  document.getElementById("sdpAnswerTextArea").textContent = JSON.stringify(peerConnection.localDescription);
+    document.getElementById("sdpAnswerTextArea").textContent = JSON.stringify(answer);
 }
 
 async function addAnswer() {
-  let answer = document.getElementById("sdpAnswerTextArea");
+  let answer = document.getElementById("sdpAnswerTextArea").value;
   if (!answer) return alert("Answer is required");
   answer = JSON.parse(answer);
 
-  if(!peerConnection.currentRemoteDescription) {
+  if (!peerConnection.currentRemoteDescription) {
     peerConnection.setRemoteDescription(answer);
   }
 }
