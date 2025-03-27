@@ -42,14 +42,14 @@ Use the following connection info provided by the exposee:
 | Role        | Username     | Password         |
 |-------------|--------------|------------------|
 | Reader      | `reader`     | `readerpassword` |
-| Reader2     | `reader2`    | `reader2password`      |
+| Reader2     | `reader2`    | `reader2pw`      |
 | ReadWriter  | `readwriter` | `rwpassword`     |
 
 ---
 
-## Connect via PowerShell (Windows)
+## Connect via PowerShell (Windows) or Terminal (Mac/Linux)
 
-Open PowerShell and run the following. You'll be prompted for a password.
+Open a terminal and run the following. You'll be prompted for a password.
 
 ### Reader:
 ```powershell
@@ -65,30 +65,6 @@ Password: `reader2pw`
 
 ### ReadWriter:
 ```powershell
-psql -h turntable.proxy.rlwy.net -U readwriter -p 15272 -d railway
-```
-Password: `rwpassword`
-
----
-
-## Connect via macOS Terminal (Same for linux)
-
-On macOS, open the Terminal app and use the following commands. You'll be prompted for a password.
-
-### Reader:
-```bash
-psql -h turntable.proxy.rlwy.net -U reader -p 15272 -d railway
-```
-Password: `readerpassword`
-
-### Reader2:
-```bash
-psql -h turntable.proxy.rlwy.net -U reader2 -p 15272 -d railway
-```
-Password: `reader2pw`
-
-### ReadWriter:
-```bash
 psql -h turntable.proxy.rlwy.net -U readwriter -p 15272 -d railway
 ```
 Password: `rwpassword`
@@ -99,7 +75,6 @@ Password: `rwpassword`
 
 ### Reader
 ```sql
-SELECT * FROM users;        -- Should return id and name only
 SELECT secret FROM users;   -- Should fail
 SELECT (id, name) FROM users; -- Should not fail
 ```
