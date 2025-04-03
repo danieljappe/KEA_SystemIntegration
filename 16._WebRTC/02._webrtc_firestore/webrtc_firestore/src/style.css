@@ -1,0 +1,20 @@
+body{
+  margin: 0 auto;
+  padding: 1vw;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+}
+
+#videos {
+  display: flex;
+  gap: 2vw;
+}
+
+video {
+  background-color: #444;
+  width: 49vw;
+  height: auto;
+  border-radius: 1vw;
+  box-shadow: 0 0 1vw rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s;
+}
