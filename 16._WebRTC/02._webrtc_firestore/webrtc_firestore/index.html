@@ -5,17 +5,22 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebRTC Firestore</title>
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-    <div id="videos">
-      <video id="localVideo" autoplay playsinline></video>
-      <video id="remoteVideo" autoplay playsinline></video>
+    <div class="container">
+      <h1>🔗 WebRTC Firestore Demo</h1>
+
+      <div id="videos">
+        <video id="localVideo" autoplay playsinline muted></video>
+        <video id="remoteVideo" autoplay playsinline></video>
+      </div>
+
+      <div class="controls">
+        <button id="startCall">📞 Start Call</button>
+        <button id="answerCall">✅ Answer Call</button>
+      </div>
     </div>
-
-    <button id="startCall">Start Call</button>
-    <button id="answerCall">Answer Call</button>
-
-    
 
     <script type="module" src="/src/main.js"></script>
   </body>

@@ -47,6 +47,7 @@ async function startCall() {
   const offerCandidates = callDocument.collection('offerCandidates');
   const answerCandidates = callDocument.collection('answerCandidates');
 
+  //localStream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: false }); # for screen sharing
   localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
   localVideo.srcObject = localStream;
 
