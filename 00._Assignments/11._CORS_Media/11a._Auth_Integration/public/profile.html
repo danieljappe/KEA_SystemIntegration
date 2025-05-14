@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Auth Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="auth-card profile-container">
+            <h1>Your Profile</h1>
+            <div id="profile-content">
+                <div class="loading">Loading profile...</div>
+            </div>
+            <a href="/logout" class="logout-btn">Logout</a>
+        </div>
+    </div>
+    
+    <script>
+        async function loadProfile() {
+            try {
+                const response = await fetch('/api/user');
+                const data = await response.json();
+                
+                if (!data.authenticated) {
+                    window.location.href = '/';
+                    return;
+                }
+                
+                const profileDiv = document.getElementById('profile-content');
+                
+                // Get provider-specific class for styling
+                const providerClass = data.provider ? 
+                    `provider-${data.provider.toLowerCase()}` : 'provider-unknown';
+                
+                // Create profile content
+                const profileHtml = `
+                    <span class="provider-badge ${providerClass}">
+                        ${data.provider || 'OAuth'}
+                    </span>
+                    <img src="${data.user.photos?.[0]?.value || 'https://via.placeholder.com/100'}" alt="Profile" class="profile-img">
+                    <div class="user-info">
+                        <h2>${data.user.displayName || data.user.username}</h2>
+                        <p>${data.user.emails?.[0]?.value || 'No email available'}</p>
+                        <p>User ID: ${data.user.id}</p>
+                    </div>
+                    <p>You've successfully logged in!</p>
+                `;
+                
+                profileDiv.innerHTML = profileHtml;
+                
+            } catch (error) {
+                console.error('Error loading profile:', error);
+                document.getElementById('profile-content').innerHTML = '<p>Error loading profile information.</p>';
+            }
+        }
+        
+        // Load profile data when page loads
+        document.addEventListener('DOMContentLoaded', loadProfile);
+    </script>
+</body>
+</html> 

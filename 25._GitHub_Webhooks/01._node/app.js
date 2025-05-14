@@ -12,8 +12,7 @@ app.post("/githubwebhookjson", (req, res) => {
 app.post("/githubwebhookform", (req, res) => {
     console.log(req.body);
     res.sendStatus(204);
-}
-);
+});
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

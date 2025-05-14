@@ -1,0 +1,16 @@
+{
+  "name": "11b._payment_integration",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A simple Stripe integration using ES modules",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "stripe": "^14.5.0",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5"
+  }
+}

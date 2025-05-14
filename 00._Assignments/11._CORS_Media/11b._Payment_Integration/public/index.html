@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stripe Payment Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .product {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        button {
+            background-color: #635bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #524bb7;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stripe Payment Demo</h1>
+    
+    <div class="product">
+        <h2>Test Product</h2>
+        <p>Description of product</p>
+        <p>Price: $19.99</p>
+        <button data-price-id="test-product">Checkout</button>
+    </div>
+
+    <div class="product">
+        <h2>Test Product 2</h2>
+        <p>Description of product</p>
+        <p>Price: 99.99 DKK</p>
+        <button data-price-id="test-product-2">Checkout</button>
+    </div>
+
+    <script type="module" src="checkout.js"></script>
+</body>
+</html>
